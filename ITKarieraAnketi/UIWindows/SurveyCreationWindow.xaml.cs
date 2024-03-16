@@ -11,25 +11,17 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using ITKarieraAnketi.UIWindows;
 
 namespace ITKarieraAnketi.UIWindows
 {
     /// <summary>
-    /// Interaction logic for LandingPageWindow.xaml
+    /// Interaction logic for SurveyCreationWindow.xaml
     /// </summary>
-    public partial class LandingPageWindow : Window
+    public partial class SurveyCreationWindow : Window
     {
-        public LandingPageWindow()
+        public SurveyCreationWindow()
         {
             InitializeComponent();
-        }
-
-        private void CreateNewServey_Click(object sender, RoutedEventArgs e)
-        {
-            SurveyCreationWindow surveyCreationWindow = new SurveyCreationWindow();
-            surveyCreationWindow.Show();
-            Close();
         }
     }
 }
