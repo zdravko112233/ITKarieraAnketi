@@ -5,8 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ITKarieraAnketi.UIWindows"
         mc:Ignorable="d"
-        Title="SurveyCreationWindow" Height="450" Width="800">
+        Title="Survey Creation" Height="450" Width="800">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal">
+            <Button Content="Back" Click="BackButton_Click" x:Name="BackButton" />
+            <Label x:Name="QuestionNumberLabel" HorizontalAlignment="Center" />
+            <Button Content="Next" Click="NextButton_Click" HorizontalAlignment="Center"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1">
+            <Label Width="776" Content="Question Title:" Height="24"/>
+            <TextBox x:Name="questionTitleTextBox" Margin="10" BorderThickness="2" />
+
+            <Label Content="Answers:" Width="776"/>
+            <StackPanel x:Name="answersPanel">
+                <TextBox x:Name="answer1TextBox" Margin="10" BorderThickness="2" />
+                <TextBox x:Name="answer2TextBox" Margin="10" BorderThickness="2" />
+            </StackPanel>
+            <Button Content="Add More Answers" Click="AddAnswerBox" Margin="10" />
+
+            <Button Content="Save and Exit" Click="SaveButton_Click" Margin="10" />
+        </StackPanel>
     </Grid>
 </Window>
