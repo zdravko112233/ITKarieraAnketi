@@ -10,7 +10,7 @@
         <TextBox x:Name="TextInput" 
              VerticalAlignment="Center" FontSize="15" 
                  FontWeight="Light" Background="Transparent"
-                 TextChanged="TextInput_TextChanged"></TextBox>
+                 TextChanged="TextInput_TextChanged" BorderThickness="2"></TextBox>
         <TextBlock x:Name="TextBoxPlaceholder" Text="{Binding TBPlaceholder}"
            VerticalAlignment="Center" FontSize="15" FontWeight="Light"
            Foreground="DarkGray" Margin="5,0,0,0" Panel.ZIndex="-1"></TextBlock>      

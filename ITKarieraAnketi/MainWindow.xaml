@@ -16,9 +16,8 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock Name ="Welcome" Text="Welcome" Grid.Row="1" FontSize="50" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
-        <UserControls:ClearableTextbox Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Width="250" Height="35" TBplaceholder="Name"></UserControls:ClearableTextbox>
-        <UserControls:ClearableTextbox Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Width="250" Height="35" TBplaceholder="Password"></UserControls:ClearableTextbox>
-        <Button Name="buttonLogin" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Width="250" Height="50" Content="Login" Click="buttonLogin_Click"></Button>
+        <TextBlock Name ="Welcome" Text="Welcome" Grid.Row="0" FontSize="50" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+        <Button Name="buttonRegister" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Width="250" Height="50" Content="Register" Click="buttonRegister_Click"></Button>
+        <Button Name="buttonLogin" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Width="250" Height="50" Content="Login" Click="buttonLogin_Click"></Button>
     </Grid>
 </Window>

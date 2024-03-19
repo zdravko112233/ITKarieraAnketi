@@ -1,5 +1,8 @@
 ﻿using System.Windows;
 using ITKarieraAnketi.UIWindows;
+using Microsoft.EntityFrameworkCore;
+
+
 namespace ITKarieraAnketi
 {
 
@@ -13,8 +16,15 @@ namespace ITKarieraAnketi
 
         private void buttonLogin_Click(object sender, RoutedEventArgs e)
         {
-            LandingPageWindow landingPageWindow = new LandingPageWindow();
-            landingPageWindow.Show();
+            LoginWindow loginWindow = new LoginWindow();
+            loginWindow.Show();
+            Close();
+        }
+
+        private void buttonRegister_Click(object sender, RoutedEventArgs e)
+        {
+            RegisterWindow registerWindow = new RegisterWindow();
+            registerWindow.Show();
             Close();
         }
     }

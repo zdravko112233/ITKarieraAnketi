@@ -25,6 +25,11 @@ namespace ITKarieraAnketi.View.UserControls
         private string textboxPlaceholder;
 
         public event PropertyChangedEventHandler? PropertyChanged;
+        public string Text
+        {
+            get { return TextInput.Text; }
+            set { TextInput.Text = value; }
+        }
 
         public string TBplaceholder
         {
@@ -59,5 +64,6 @@ namespace ITKarieraAnketi.View.UserControls
                 TextBoxPlaceholder.Visibility = Visibility.Hidden;
             }
         }
+
     }
 }
