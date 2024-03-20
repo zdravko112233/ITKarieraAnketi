@@ -27,9 +27,18 @@ namespace ITKarieraAnketi.UIWindows
 
         private void CreateNewServey_Click(object sender, RoutedEventArgs e)
         {
-            SurveyCreationWindow surveyCreationWindow = new SurveyCreationWindow();
-            surveyCreationWindow.Show();
-            Close();
+            // Show an input dialog
+            var dialog = new InputDialog("Enter the name of the new survey:");
+            if (dialog.ShowDialog() == true)
+            {
+                // Get the name from the dialog
+                string surveyName = dialog.ResponseText;
+
+                // Pass the name to the SurveyCreationWindow
+                SurveyCreationWindow surveyCreationWindow = new SurveyCreationWindow(surveyName);
+                surveyCreationWindow.Show();
+                Close();
+            }
         }
     }
 }

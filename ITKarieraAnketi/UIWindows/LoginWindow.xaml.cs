@@ -31,14 +31,16 @@ namespace ITKarieraAnketi.UIWindows
                 var user = context.Users.FirstOrDefault(u => u.Name == textLoginName.Text && u.Password == textLoginPassword.Text);
                 if (user != null)
                 {
-                    // checks if the user is in the database, if so, it opens the landing page
+                    // set the logged in user
+                    Session.LoggedInUser = user;
+
+                    // open the landing page
                     LandingPageWindow landingPageWindow = new LandingPageWindow();
                     landingPageWindow.Show();
                     Close();
                 }
                 else
                 {
-                    // if inputted info is not in the database, it shows >this< message box
                     MessageBox.Show("Invalid account details.");
                 }
             }

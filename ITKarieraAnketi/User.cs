@@ -13,7 +13,18 @@ namespace ITKarieraAnketi
         public int Id { get; set; }
         public string Name { get; set; }
         public string Password { get; set; }
+        public List<Survey> Surveys { get; set; }
     }
+
+    public class Survey
+    {
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public int UserId { get; set; }
+        public User User { get; set; }
+    }
+
     public class UserContext : DbContext
     {
         public DbSet<User> Users { get; set; }

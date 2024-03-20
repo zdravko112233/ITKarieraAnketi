@@ -42,7 +42,7 @@ namespace ITKarieraAnketi.UIWindows
             }
             catch (Microsoft.Data.SqlClient.SqlException ex)
             {
-                MessageBox.Show(ex.Message, "Database error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.Message, "Database error, please try again later.", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
         }
