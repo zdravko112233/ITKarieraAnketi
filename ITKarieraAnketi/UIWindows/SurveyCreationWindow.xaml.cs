@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using System.Windows.Shapes;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ITKarieraAnketi.UIWindows
 {
@@ -25,13 +26,13 @@ namespace ITKarieraAnketi.UIWindows
         private List<TextBox> answerBoxes = new List<TextBox>();
         private List<SurveyQuestion> questions = new List<SurveyQuestion>();
         private int currentQuestionIndex = -1;
+        private string surveyName;
 
         public SurveyCreationWindow(string surveyName)
         {
             InitializeComponent();
-
             // Set the survey name
-
+            this.surveyName = surveyName;
 
             // Add two initial answer boxes
             answerBoxes.Add(answer1TextBox);
@@ -39,32 +40,44 @@ namespace ITKarieraAnketi.UIWindows
 
             GoToNextQuestion();
         }
-        public class Answers
-        {
-            [Key]
-            public int Id { get; set; }
-            public string? Text { get; set; }
-            public int SurveyQuestionId { get; set; }
-            public SurveyQuestion? SurveyQuestion { get; set; }
-        }
         public class SurveyQuestion
         {
             [Key]
-            public int Id { get; set; }
-            public string Question { get; set; }
-            public string Answers { get; set; } 
-            public int UserId { get; set; }
+            [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 
-            public User User { get; set; }
+            public int QuestionId { get; set; }
+            public string QuestionText { get; set; }
+            public int SurveyId { get; set; }
+            public Survey Survey { get; set; }
+            public List<Answer> Answers { get; set; }
         }
+
+        public class Answer
+        {
+            [Key]
+            [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+            public int AnswerId { get; set; }
+            public string AnswerText { get; set; }
+            [ForeignKey("SurveyQuestion")]
+            public int QuestionId { get; set; }
+            public SurveyQuestion SurveyQuestion { get; set; }
+        }
+
         public class MyDbContext : DbContext
         {
-            public DbSet<User>? Users { get; set; }
-            public DbSet<SurveyQuestion>? Surveys { get; set; }
+            public DbSet<User> Users { get; set; }
+            public DbSet<Survey> Surveys { get; set; }
+            public DbSet<SurveyQuestion> SurveyQuestions { get; set; }
+            public DbSet<Answer> Answers { get; set; }
 
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             {
                 optionsBuilder.UseMySql("server=sql11.freesqldatabase.com;database=sql11692795;user=sql11692795;password=j9ky13rSlb;port=3306;", new MySqlServerVersion(new Version(5, 5, 62)));
+            }
+
+            protected override void OnModelCreating(ModelBuilder modelBuilder)
+            {
+                modelBuilder.Entity<SurveyQuestion>().ToTable("Questions");
             }
         }
 
@@ -105,27 +118,30 @@ namespace ITKarieraAnketi.UIWindows
             // Save the survey to the database
             using (var context = new MyDbContext())
             {
+                var survey = new Survey
+                {
+                    SurveyName = surveyName,
+                    UserId = Session.LoggedInUser?.Id ?? 0
+                };
+                context.Surveys.Add(survey);
+                context.SaveChanges();
+
                 foreach (var question in questions)
                 {
-                    // Check if the user exists
-                    var user = context.Users.Find(question.UserId);
-                    if (user == null)
-                    {
-                        // If the user doesn't exist, create a new user
-                        user = new User { Id = question.UserId, Name = Session.LoggedInUser?.Name ?? string.Empty };
-                        context.Users.Add(user);
-                    }
-                    else
-                    {
-                        // If the user exists, update the name
-                        user.Name = Session.LoggedInUser?.Name ?? string.Empty;
-                    }
+                    // Set the survey ID of the question
+                    question.SurveyId = survey.SurveyId;
 
-                    // Set the user of the question
-                    question.User = user;
+                    // Add the question to the database
+                    context.SurveyQuestions.Add(question);
 
-                    context.Surveys.Add(question);
+                    // Add the answers to the database
+                    foreach (var answer in question.Answers)
+                    {
+                        context.Answers.Add(answer);
+                    }
                 }
+
+                // Save changes after adding all questions and answers
                 context.SaveChanges();
             }
 
@@ -179,11 +195,10 @@ namespace ITKarieraAnketi.UIWindows
 
         private void LoadQuestion(SurveyQuestion question)
         {
-            questionTitleTextBox.Text = question.Question;
-            for (int i = 0; i < question.Answers.Length; i++)
+            questionTitleTextBox.Text = question.QuestionText;
+            for (int i = 0; i < question.Answers.Count; i++)
             {
-               
-                answerBoxes[i].Text = question.Answers[i].ToString();
+                answerBoxes[i].Text = question.Answers[i].AnswerText;
             }
         }
 
@@ -198,11 +213,11 @@ namespace ITKarieraAnketi.UIWindows
 
         private SurveyQuestion GetQuestionFromInputs()
         {
+            var answers = answerBoxes.Select(box => new Answer { AnswerText = box.Text }).ToList();
             return new SurveyQuestion
             {
-                Question = questionTitleTextBox.Text,
-                Answers = string.Join(",", answerBoxes.Select(box => box.Text)),
-                UserId = Session.LoggedInUser?.Id ?? 0
+                QuestionText = questionTitleTextBox.Text,
+                Answers = answers
             };
         }
 

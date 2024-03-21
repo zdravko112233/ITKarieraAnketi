@@ -24,7 +24,7 @@ namespace ITKarieraAnketi.UIWindows
             InitializeComponent();
             lblQuestion.Content = question;
         }
-
+       
         public string ResponseText
         {
             get { return nameTextBox.Text; } 

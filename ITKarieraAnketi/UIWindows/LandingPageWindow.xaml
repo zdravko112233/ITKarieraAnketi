@@ -26,7 +26,7 @@
         <Button x:Name="CreateNewServey" Content="New Survey" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" Margin="9,30,0,0"  Click="CreateNewServey_Click" FontSize="15" ></Button>
 
         <!-- Static Bar -->
-        <Rectangle Grid.Row="2" Fill="#FF8FFFFF" Opacity="0.85"/>
+        <Rectangle Grid.Row="2" Fill="LightGray" Opacity="0.85"/>
 
     </Grid>
 </Window>

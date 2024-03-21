@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Text;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace ITKarieraAnketi
 {
@@ -13,25 +14,46 @@ namespace ITKarieraAnketi
         public int Id { get; set; }
         public string Name { get; set; }
         public string Password { get; set; }
-        public List<Survey> Surveys { get; set; }
     }
 
     public class Survey
     {
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public string Description { get; set; }
+        public int SurveyId { get; set; }
+        public string SurveyName { get; set; }
         public int UserId { get; set; }
         public User User { get; set; }
+    }
+    public class SurveyQuestion
+    {
+        [Key]
+        public int QuestionId { get; set; }
+        public string QuestionText { get; set; }
+        public int SurveyId { get; set; }
+        public Survey Survey { get; set; }
+        public List<Answer> Answers { get; set; }
+    }
+
+    public class Answer
+    {
+        public int AnswerId { get; set; }
+        public string AnswerText { get; set; }
+        public int QuestionId { get; set; }
+        public SurveyQuestion SurveyQuestion { get; set; }
     }
 
     public class UserContext : DbContext
     {
         public DbSet<User> Users { get; set; }
+        public DbSet<Survey> Surveys { get; set; }
+        public DbSet<SurveyQuestion> SurveyQuestions { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseMySql("server=sql11.freesqldatabase.com;database=sql11692795;user=sql11692795;password=j9ky13rSlb;port=3306;", new MySqlServerVersion(new Version(5, 5, 62)));
+        }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<SurveyQuestion>().ToTable("Questions");
         }
     }
 }
