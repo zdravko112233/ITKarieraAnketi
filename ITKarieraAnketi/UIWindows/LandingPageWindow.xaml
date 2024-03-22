@@ -8,9 +8,9 @@
         Title="LandingPageWindow" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition/>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
         <!-- Options Bar -->
@@ -18,12 +18,16 @@
             <MenuItem Header="Account" FontSize="20">
                 <MenuItem Header="Logout" FontSize="15"></MenuItem>
             </MenuItem>
+            <MenuItem Header="New Survey" FontSize="20" Click="CreateNewServey_Click"></MenuItem>
         </Menu>
         <Image HorizontalAlignment="Left" Height="31" Margin="716,-2,0,0" VerticalAlignment="Top" Width="31"/>
-        
 
-        <!-- 'Create Survey' Bar -->
-        <Button x:Name="CreateNewServey" Content="New Survey" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" Margin="9,30,0,0"  Click="CreateNewServey_Click" FontSize="15" ></Button>
+        <!-- Surveys -->
+        <ScrollViewer Grid.Row="1">
+            <WrapPanel x:Name="SurveyList" Orientation="Horizontal" ItemWidth="200">
+                <!-- Survey items will be added here -->
+            </WrapPanel>
+        </ScrollViewer>
 
         <!-- Static Bar -->
         <Rectangle Grid.Row="2" Fill="LightGray" Opacity="0.85"/>

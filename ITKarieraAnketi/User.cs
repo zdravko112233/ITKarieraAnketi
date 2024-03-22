@@ -22,6 +22,7 @@ namespace ITKarieraAnketi
         public string SurveyName { get; set; }
         public int UserId { get; set; }
         public User User { get; set; }
+        public List<SurveyQuestion> SurveyQuestions { get; set; }
     }
     public class SurveyQuestion
     {
@@ -46,6 +47,7 @@ namespace ITKarieraAnketi
         public DbSet<User> Users { get; set; }
         public DbSet<Survey> Surveys { get; set; }
         public DbSet<SurveyQuestion> SurveyQuestions { get; set; }
+        public DbSet<Answer> Answers { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -54,6 +56,15 @@ namespace ITKarieraAnketi
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<SurveyQuestion>().ToTable("Questions");
+            modelBuilder.Entity<Answer>().ToTable("Answers");
+            modelBuilder.Entity<SurveyQuestion>()
+                        .HasOne(q => q.Survey)
+                        .WithMany(s => s.SurveyQuestions)
+                        .HasForeignKey(q => q.SurveyId);
+            modelBuilder.Entity<Answer>()
+                        .HasOne(a => a.SurveyQuestion)
+                        .WithMany(q => q.Answers)
+                        .HasForeignKey(a => a.QuestionId);
         }
     }
 }

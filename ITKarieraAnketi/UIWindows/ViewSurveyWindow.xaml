@@ -1,0 +1,21 @@
+﻿<Window x:Class="ITKarieraAnketi.UIWindows.ViewSurveyWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ITKarieraAnketi.UIWindows"
+        mc:Ignorable="d"
+        Title="ViewSurveyWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Label x:Name="SurveyNameLabel" HorizontalAlignment="Center" />
+
+        <StackPanel Grid.Row="1" x:Name="QuestionsPanel">
+            <!-- Questions and answers will be added here -->
+        </StackPanel>
+    </Grid>
+</Window>
