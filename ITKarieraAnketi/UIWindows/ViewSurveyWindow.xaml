@@ -15,7 +15,6 @@
         <Label x:Name="SurveyNameLabel" HorizontalAlignment="Center" />
 
         <StackPanel Grid.Row="1" x:Name="QuestionsPanel">
-            <!-- Questions and answers will be added here -->
         </StackPanel>
     </Grid>
 </Window>

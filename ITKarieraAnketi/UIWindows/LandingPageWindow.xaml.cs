@@ -37,7 +37,9 @@ namespace ITKarieraAnketi.UIWindows
                     Content = survey.SurveyName,
                     Width = 200,
                     Height = 100,
-                    Margin = new Thickness(10)
+                    Margin = new Thickness(10),
+                    BorderThickness = new Thickness(3)
+
                 };
                 button.Click += (sender, e) => OpenSurvey(survey.SurveyId);
                 SurveyList.Children.Add(button);
@@ -50,7 +52,7 @@ namespace ITKarieraAnketi.UIWindows
                 return context.Surveys
                     .Where(s => s.UserId == userId)
                     .OrderByDescending(s => s.SurveyId)
-                    .Take(9)
+                    .Take(15)
                     .ToList();
             }
         }

@@ -6,6 +6,7 @@ using System.Text;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using System.Configuration;
 
 namespace ITKarieraAnketi
 {
@@ -51,7 +52,7 @@ namespace ITKarieraAnketi
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql("server=sql11.freesqldatabase.com;database=sql11692795;user=sql11692795;password=j9ky13rSlb;port=3306;", new MySqlServerVersion(new Version(5, 5, 62)));
+            optionsBuilder.UseMySql(ConfigurationManager.ConnectionStrings["UserDatabase"].ConnectionString, new MySqlServerVersion(new Version(5, 5, 62)));
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
