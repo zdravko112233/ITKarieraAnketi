@@ -78,5 +78,46 @@ namespace ITKarieraAnketi.UIWindows
                 Close();
             }
         }
+
+        private void MenuItemLogout_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+            Close();
+        }
+
+        private void MenuItemDeleteAccount_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult messageBoxResult = MessageBox.Show("Are you sure you want to delete your account?", "Delete Confirmation", MessageBoxButton.YesNo);
+            if (messageBoxResult == MessageBoxResult.Yes)
+            {
+                using (var context = new UserContext())
+                {
+                    var user = context.Users.FirstOrDefault(u => u.Id == Session.LoggedInUser.Id);
+
+                    if (user != null)
+                    {
+                        var surveys = context.Surveys.Where(s => s.UserId == user.Id).ToList();
+                        foreach (var survey in surveys)
+                        {
+                            var questions = context.SurveyQuestions.Where(q => q.SurveyId == survey.SurveyId).ToList();
+                            foreach (var question in questions)
+                            {
+                                var answers = context.Answers.Where(a => a.QuestionId == question.QuestionId).ToList();
+                                context.Answers.RemoveRange(answers);
+                            }
+                            context.SurveyQuestions.RemoveRange(questions);
+                        }
+                        context.Surveys.RemoveRange(surveys);
+                        context.Users.Remove(user);
+                        context.SaveChanges();
+                    }
+                }
+
+                MainWindow mainWindow = new MainWindow();
+                mainWindow.Show();
+                Close();
+            }
+        }
     }
 }

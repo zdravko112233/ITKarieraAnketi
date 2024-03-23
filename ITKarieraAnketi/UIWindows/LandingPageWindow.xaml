@@ -16,7 +16,8 @@
         <!-- Options Bar -->
         <Menu>
             <MenuItem Header="Account" FontSize="20">
-                <MenuItem Header="Logout" FontSize="15"></MenuItem>
+                <MenuItem Header="Logout" FontSize="15" Click="MenuItemLogout_Click"></MenuItem>
+                <MenuItem Header="Delete Account" FontSize="15" Click="MenuItemDeleteAccount_Click"></MenuItem>
             </MenuItem>
             <MenuItem Header="New Survey" FontSize="20" Click="CreateNewServey_Click"></MenuItem>
         </Menu>

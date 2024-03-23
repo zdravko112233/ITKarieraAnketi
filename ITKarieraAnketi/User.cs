@@ -54,18 +54,27 @@ namespace ITKarieraAnketi
         {
             optionsBuilder.UseMySql(ConfigurationManager.ConnectionStrings["UserDatabase"].ConnectionString, new MySqlServerVersion(new Version(5, 5, 62)));
         }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<SurveyQuestion>().ToTable("Questions");
             modelBuilder.Entity<Answer>().ToTable("Answers");
+
             modelBuilder.Entity<SurveyQuestion>()
                         .HasOne(q => q.Survey)
                         .WithMany(s => s.SurveyQuestions)
                         .HasForeignKey(q => q.SurveyId);
+
             modelBuilder.Entity<Answer>()
                         .HasOne(a => a.SurveyQuestion)
                         .WithMany(q => q.Answers)
                         .HasForeignKey(a => a.QuestionId);
+
+            modelBuilder.Entity<Survey>()
+                        .HasOne(s => s.User)
+                        .WithMany()
+                        .HasForeignKey(s => s.UserId)
+                        .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
