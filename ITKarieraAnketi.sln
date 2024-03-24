@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITKarieraAnketi", "ITKarieraAnketi\ITKarieraAnketi.csproj", "{423B7AEF-F363-4F43-9085-EA29D0CE0A03}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITKarieraAnketi", "ITKarieraAnketi\ITKarieraAnketi.csproj", "{423B7AEF-F363-4F43-9085-EA29D0CE0A03}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComponentTests", "ComponentTests\ComponentTests.csproj", "{7BC27D3D-7A84-4A4F-9EDB-410831109BC7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{423B7AEF-F363-4F43-9085-EA29D0CE0A03}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{423B7AEF-F363-4F43-9085-EA29D0CE0A03}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{423B7AEF-F363-4F43-9085-EA29D0CE0A03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BC27D3D-7A84-4A4F-9EDB-410831109BC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BC27D3D-7A84-4A4F-9EDB-410831109BC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BC27D3D-7A84-4A4F-9EDB-410831109BC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BC27D3D-7A84-4A4F-9EDB-410831109BC7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

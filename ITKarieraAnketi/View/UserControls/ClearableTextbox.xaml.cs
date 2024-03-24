@@ -13,7 +13,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.ComponentModel;
 
 namespace ITKarieraAnketi.View.UserControls
 {
@@ -47,13 +46,13 @@ namespace ITKarieraAnketi.View.UserControls
             InitializeComponent();
         }
 
-        private void buttonClear_Click(object sender, RoutedEventArgs e)
+        public void buttonClear_Click(object sender, RoutedEventArgs e)
         {
             TextInput.Clear();
             TextInput.Focus();
         }
 
-        private void TextInput_TextChanged(object sender, TextChangedEventArgs e)
+        public void TextInput_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (string.IsNullOrEmpty(TextInput.Text))
             {

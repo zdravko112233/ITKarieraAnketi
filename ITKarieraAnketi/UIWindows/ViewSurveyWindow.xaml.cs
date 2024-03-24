@@ -25,7 +25,7 @@ namespace ITKarieraAnketi.UIWindows
             InitializeComponent();
             LoadSurvey(surveyId);
         }
-        private void LoadSurvey(int surveyId)
+        public void LoadSurvey(int surveyId)
         {
             using (var context = new UserContext())
             {

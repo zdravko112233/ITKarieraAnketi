@@ -25,7 +25,7 @@ namespace ITKarieraAnketi.UIWindows
             InitializeComponent();
         }
 
-        private void buttonLogin_Click(object sender, RoutedEventArgs e)
+        public void buttonLogin_Click(object sender, RoutedEventArgs e)
         {
             using (var context = new UserContext())
             {
@@ -44,7 +44,7 @@ namespace ITKarieraAnketi.UIWindows
                 }
             }
         }
-        private string HashUserPassword(string password)
+        public string HashUserPassword(string password)
         {
             using (SHA256 sha256Hash = SHA256.Create())
             {
@@ -57,6 +57,15 @@ namespace ITKarieraAnketi.UIWindows
                 }
                 return builder.ToString();
             }
+        }
+        public void SetLoginName(string name)
+        {
+            textLoginName.Text = name;
+        }
+
+        public void SetLoginPassword(string password)
+        {
+            textLoginPassword.Text = password;
         }
     }
 }

@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -24,16 +25,26 @@ namespace ITKarieraAnketi.UIWindows
             InitializeComponent();
             lblQuestion.Content = question;
         }
-       
+
         public string ResponseText
         {
-            get { return nameTextBox.Text; } 
+            get { return nameTextBox.Text; }
             set { nameTextBox.Text = value; }
         }
 
-        private void btnDialogOk_Click(object sender, RoutedEventArgs e)
+        public bool TryCloseDialog()
         {
-            DialogResult = true;
+            if (this.IsVisible)
+            {
+                this.Close();
+                return true;
+            }
+            return false;
+        }
+
+        public void btnDialogOk_Click(object sender, RoutedEventArgs e)
+        {
+            TryCloseDialog();
         }
     }
 }

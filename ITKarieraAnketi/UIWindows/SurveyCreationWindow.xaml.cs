@@ -24,10 +24,11 @@ namespace ITKarieraAnketi.UIWindows
     /// </summary>
     public partial class SurveyCreationWindow : Window
     {
-        private List<TextBox> answerBoxes = new List<TextBox>();
+        
+        public List<TextBox> answerBoxes = new List<TextBox>();
         private List<SurveyQuestion> questions = new List<SurveyQuestion>();
         private int currentQuestionIndex = -1;
-        private string surveyName;
+        public string surveyName;
 
         public SurveyCreationWindow(string surveyName)
         {
@@ -41,6 +42,8 @@ namespace ITKarieraAnketi.UIWindows
 
             GoToNextQuestion();
         }
+        public int CurrentQuestionIndex => currentQuestionIndex;
+        public TextBox QuestionTitleTextBox => questionTitleTextBox;
         public class SurveyQuestion
         {
             [Key]
@@ -82,7 +85,7 @@ namespace ITKarieraAnketi.UIWindows
             }
         }
 
-        private void AddAnswerBox(object sender, RoutedEventArgs e)
+        public void AddAnswerBox(object sender, RoutedEventArgs e)
         {
             if (answerBoxes.Count >= 4)
             {
@@ -166,7 +169,7 @@ namespace ITKarieraAnketi.UIWindows
             }
         }
 
-        private void GoToNextQuestion()
+        public void GoToNextQuestion()
         {
             currentQuestionIndex++;
             if (currentQuestionIndex < questions.Count)
@@ -182,19 +185,18 @@ namespace ITKarieraAnketi.UIWindows
             BackButton.IsEnabled = currentQuestionIndex > 0;
         }
 
-        private void GoToPreviousQuestion()
+        public void GoToPreviousQuestion()
         {
             if (currentQuestionIndex > 0)
             {
                 currentQuestionIndex--;
                 LoadQuestion(questions[currentQuestionIndex]);
+                UpdateQuestionNumberLabel();
             }
-
-            UpdateQuestionNumberLabel();
             BackButton.IsEnabled = currentQuestionIndex > 0;
         }
 
-        private void LoadQuestion(SurveyQuestion question)
+        public void LoadQuestion(SurveyQuestion question)
         {
             questionTitleTextBox.Text = question.QuestionText;
             for (int i = 0; i < question.Answers.Count; i++)
@@ -203,7 +205,7 @@ namespace ITKarieraAnketi.UIWindows
             }
         }
 
-        private void ClearInputs()
+        public void ClearInputs()
         {
             questionTitleTextBox.Clear();
             foreach (TextBox answerBox in answerBoxes)
@@ -212,7 +214,7 @@ namespace ITKarieraAnketi.UIWindows
             }
         }
 
-        private SurveyQuestion GetQuestionFromInputs()
+        public SurveyQuestion GetQuestionFromInputs()
         {
             var answers = answerBoxes.Select(box => new Answer { AnswerText = box.Text }).ToList();
             return new SurveyQuestion
@@ -226,6 +228,36 @@ namespace ITKarieraAnketi.UIWindows
         {
             QuestionNumberLabel.Content = $"Question {currentQuestionIndex + 1}";
         }
-        
+
+        public void RemoveAnswerBox(object sender, RoutedEventArgs e)
+        {
+            if (answerBoxes.Count > 2)
+            {
+                var lastAnswerBox = answerBoxes[answerBoxes.Count - 1];
+                answerBoxes.Remove(lastAnswerBox);
+                answersPanel.Children.Remove(lastAnswerBox);
+            }
+        }
+        public void SetQuestionTitle(string text)
+        {
+            questionTitleTextBox.Text = text;
+        }
+
+        public void SetAnswerBoxText(int index, string text)
+        {
+            if (index >= 0 && index < answerBoxes.Count)
+            {
+                answerBoxes[index].Text = text;
+            }
+        }
+
+        public string GetAnswerBoxText(int index)
+        {
+            if (index >= 0 && index < answerBoxes.Count)
+            {
+                return answerBoxes[index].Text;
+            }
+            return null;
+        }
     }
 }

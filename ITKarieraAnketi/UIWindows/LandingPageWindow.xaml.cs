@@ -21,9 +21,12 @@ namespace ITKarieraAnketi.UIWindows
     /// </summary>
     public partial class LandingPageWindow : Window
     {
+        public UserContext UserContext { get; set; }
+
         public LandingPageWindow()
         {
             InitializeComponent();
+            UserContext = new UserContext();
             LoadSurveys();
         }
         private void LoadSurveys()
@@ -47,14 +50,11 @@ namespace ITKarieraAnketi.UIWindows
         }
         public List<Survey> GetSurveysForUser(int userId)
         {
-            using (var context = new UserContext())
-            {
-                return context.Surveys
-                    .Where(s => s.UserId == userId)
-                    .OrderByDescending(s => s.SurveyId)
-                    .Take(15)
-                    .ToList();
-            }
+            return UserContext.Surveys
+                .Where(s => s.UserId == userId)
+                .OrderByDescending(s => s.SurveyId)
+                .Take(15)
+                .ToList();
         }
         private void OpenSurvey(int surveyId)
         {

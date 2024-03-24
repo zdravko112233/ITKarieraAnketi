@@ -76,5 +76,6 @@ namespace ITKarieraAnketi
                         .HasForeignKey(s => s.UserId)
                         .OnDelete(DeleteBehavior.Cascade);
         }
+
     }
 }
