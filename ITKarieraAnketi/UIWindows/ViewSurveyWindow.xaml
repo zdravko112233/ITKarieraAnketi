@@ -12,6 +12,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Label x:Name="SurveyNameLabel" HorizontalAlignment="Center" />
+        <Button x:Name="GoBackToLandingPage" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Go Back" FontSize="15" Click="GoBackToLandingPage_Click"/>
         <StackPanel Grid.Row="1" x:Name="QuestionsPanel">
         </StackPanel>
     </Grid>

@@ -55,5 +55,12 @@ namespace ITKarieraAnketi.UIWindows
                 }
             }
         }
+
+        private void GoBackToLandingPage_Click(object sender, RoutedEventArgs e)
+        {
+            LandingPageWindow landingPageWindow = new LandingPageWindow();
+            landingPageWindow.Show();
+            Close();
+        }
     }
 }
