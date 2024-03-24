@@ -62,5 +62,6 @@ namespace ITKarieraAnketi.UIWindows
                 return builder.ToString();
             }
         }
+        // hash the user's inputted password using SHA256 and set it as their password in the database(through buttonCreateAccount_Click)
     }
 }

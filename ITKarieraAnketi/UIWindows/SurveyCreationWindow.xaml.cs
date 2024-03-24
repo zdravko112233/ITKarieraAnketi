@@ -89,11 +89,9 @@ namespace ITKarieraAnketi.UIWindows
         {
             if (answerBoxes.Count >= 4)
             {
-                // Maximum number of answers reached
                 return;
             }
 
-            // Add a new answer box, with the same properties as the first two
             TextBox newAnswerBox = new TextBox
             {
                 Margin = new Thickness(10),
@@ -102,6 +100,7 @@ namespace ITKarieraAnketi.UIWindows
             answerBoxes.Add(newAnswerBox);
             answersPanel.Children.Add(newAnswerBox);
         }
+        // add a new answer box, with the same properties as the first two
 
         private void NextButton_Click(object sender, RoutedEventArgs e)
         {
@@ -119,7 +118,7 @@ namespace ITKarieraAnketi.UIWindows
         {
             SaveCurrentQuestion();
 
-            // Save the survey to the database
+            // save the survey to the database
             using (var context = new MyDbContext())
             {
                 var survey = new Survey
@@ -132,24 +131,24 @@ namespace ITKarieraAnketi.UIWindows
 
                 foreach (var question in questions)
                 {
-                    // Set the survey ID of the question
+                    // set the survey ID of the question
                     question.SurveyId = survey.SurveyId;
 
-                    // Add the question to the database
+                    // add the question to the database
                     context.SurveyQuestions.Add(question);
 
-                    // Add the answers to the database
+                    // add the answers to the database
                     foreach (var answer in question.Answers)
                     {
                         context.Answers.Add(answer);
                     }
                 }
 
-                // Save changes after adding all questions and answers
+                // save changes after adding all questions and answers
                 context.SaveChanges();
             }
 
-            // Close the window and open the landing page
+            // close the window and open the landing page
             LandingPageWindow landingPageWindow = new LandingPageWindow();
             landingPageWindow.Show();
             this.Close();
@@ -159,12 +158,12 @@ namespace ITKarieraAnketi.UIWindows
         {
             if (currentQuestionIndex >= 0 && currentQuestionIndex < questions.Count)
             {
-                // Update existing question
+                // update existing question
                 questions[currentQuestionIndex] = GetQuestionFromInputs();
             }
             else
             {
-                // Add new question
+                // add new question
                 questions.Add(GetQuestionFromInputs());
             }
         }
@@ -221,6 +220,7 @@ namespace ITKarieraAnketi.UIWindows
             {
                 QuestionText = questionTitleTextBox.Text,
                 Answers = answers
+                // create a new question with the text from the question title box and the answers from the answer boxes
             };
         }
 
@@ -236,6 +236,7 @@ namespace ITKarieraAnketi.UIWindows
                 var lastAnswerBox = answerBoxes[answerBoxes.Count - 1];
                 answerBoxes.Remove(lastAnswerBox);
                 answersPanel.Children.Remove(lastAnswerBox);
+                // remove the last answer box from the list and the panel
             }
         }
         public void SetQuestionTitle(string text)

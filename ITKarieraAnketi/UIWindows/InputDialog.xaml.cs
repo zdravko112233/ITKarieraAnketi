@@ -44,7 +44,9 @@ namespace ITKarieraAnketi.UIWindows
 
         public void btnDialogOk_Click(object sender, RoutedEventArgs e)
         {
+            DialogResult = true;
             TryCloseDialog();
+            // when the dialog is closed(user clicking the OK button), open SurveyCreationWindow 
         }
     }
 }

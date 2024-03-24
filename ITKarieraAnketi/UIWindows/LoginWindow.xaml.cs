@@ -44,6 +44,7 @@ namespace ITKarieraAnketi.UIWindows
                 }
             }
         }
+        // hashes the password, checks if its the same as the one in the database; if it is, open LandingPageWindow; if not, show an error message
         public string HashUserPassword(string password)
         {
             using (SHA256 sha256Hash = SHA256.Create())

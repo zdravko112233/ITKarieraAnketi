@@ -35,19 +35,14 @@ namespace UnitTest1
         [Test]
         public void TestTextProperty()
         {
-            // Arrange
+            
             string expectedText = "Test text";
-
-            // Act
             clearableTextbox.Text = expectedText;
-
-            // Assert
             Assert.That(clearableTextbox.Text, Is.EqualTo(expectedText));
         }
         [Test]
         public void TestClearableTextboxConstructor()
         {
-            // Assert
             Assert.That(clearableTextbox.Text, Is.Empty);
             Assert.That(clearableTextbox.TBplaceholder, Is.Null);
         }
@@ -55,26 +50,16 @@ namespace UnitTest1
         [Test]
         public void TestButtonClearClick()
         {
-            // Arrange
             clearableTextbox.Text = "Test text";
-
-            // Act
             clearableTextbox.buttonClear_Click(null, null);
-
-            // Assert
             Assert.That(clearableTextbox.Text, Is.Empty);
         }
 
         [Test]
         public void TestTBplaceholderProperty()
         {
-            // Arrange
             string expectedPlaceholder = "Test placeholder";
-
-            // Act
             clearableTextbox.TBplaceholder = expectedPlaceholder;
-
-            // Assert
             Assert.That(clearableTextbox.TBplaceholder, Is.EqualTo(expectedPlaceholder));
         }
 
@@ -117,54 +102,35 @@ namespace UnitTest1
         [Test]
         public void TestConstructor()
         {
-            // Arrange
             string expectedSurveyName = "Test survey";
-
-            // Act
             var window = new SurveyCreationWindow(expectedSurveyName);
-
-            // Assert
             Assert.That(window.surveyName, Is.EqualTo(expectedSurveyName));
         }
         [Test]
         public void TestAddAnswerBox()
         {
-            // Arrange
             var window = new SurveyCreationWindow("Test survey");
             int initialAnswerBoxCount = window.answerBoxes.Count;
-
-            // Act
             window.AddAnswerBox(null, null);
-
-            // Assert
             Assert.That(window.answerBoxes.Count, Is.EqualTo(initialAnswerBoxCount + 1));
         }
         [Test]
         public void TestRemoveAnswerBox()
         {
-            // Arrange
             var window = new SurveyCreationWindow("Test survey");
             window.AddAnswerBox(null, null);
             int initialAnswerBoxCount = window.answerBoxes.Count;
-
-            // Act
             window.RemoveAnswerBox(null, null);
-
-            // Assert
             Assert.That(window.answerBoxes.Count, Is.EqualTo(initialAnswerBoxCount - 1));
         }
         [Test]
         public void TestGoToNextQuestion()
         {
-            // Arrange
             surveyCreationWindow?.SetQuestionTitle("Question 1");
             surveyCreationWindow?.SetAnswerBoxText(0, "Answer 1");
             surveyCreationWindow?.SetAnswerBoxText(1, "Answer 2");
-
-            // Act
             surveyCreationWindow?.GoToNextQuestion();
 
-            // Assert
             Assert.That(surveyCreationWindow?.CurrentQuestionIndex, Is.EqualTo(1));
             Assert.That(surveyCreationWindow?.QuestionTitleTextBox.Text, Is.EqualTo(string.Empty));
             Assert.That(surveyCreationWindow?.GetAnswerBoxText(0), Is.EqualTo(string.Empty));
@@ -185,26 +151,16 @@ namespace UnitTest1
             [Test]
             public void TestResponseTextProperty()
             {
-                // Arrange
                 string expectedText = "Test response";
-
-                // Act
                 inputDialog.ResponseText = expectedText;
-
-                // Assert
                 Assert.That(inputDialog.ResponseText, Is.EqualTo(expectedText));
             }
 
             [Test]
             public void TestTryCloseDialog()
             {
-                // Arrange
                 inputDialog.ResponseText = "Test response";
-
-                // Act
                 bool result = inputDialog.TryCloseDialog();
-
-                // Assert
                 Assert.That(result, Is.False);
             }
         }
@@ -222,7 +178,6 @@ namespace UnitTest1
             [Test]
             public void TestHashUserPassword()
             {
-                // Arrange
                 string password = "TestPassword";
                 string expectedHash;
 
@@ -237,11 +192,7 @@ namespace UnitTest1
                     }
                     expectedHash = builder.ToString();
                 }
-
-                // Act
                 string actualHash = loginWindow.HashUserPassword(password);
-
-                // Assert
                 Assert.That(actualHash, Is.EqualTo(expectedHash));
             }
         }

@@ -11,9 +11,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-
         <Label x:Name="SurveyNameLabel" HorizontalAlignment="Center" />
-
         <StackPanel Grid.Row="1" x:Name="QuestionsPanel">
         </StackPanel>
     </Grid>

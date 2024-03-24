@@ -34,11 +34,17 @@ namespace ITKarieraAnketi.UIWindows
                     .ThenInclude(q => q.Answers)
                     .Single(s => s.SurveyId == surveyId);
 
+                // load the survey with the given id from the database
+
                 SurveyNameLabel.Content = survey.SurveyName;
+
+                // set the survey name
 
                 foreach (var question in survey.SurveyQuestions)
                 {
                     QuestionsPanel.Children.Add(new Label { Content = question.QuestionText });
+                    
+                    // add a label with the question text
 
                     var listBox = new ListBox();
                     foreach (var answer in question.Answers)

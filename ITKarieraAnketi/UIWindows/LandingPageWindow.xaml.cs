@@ -44,8 +44,11 @@ namespace ITKarieraAnketi.UIWindows
                     BorderThickness = new Thickness(3)
 
                 };
+                // if the user has created surveys, display them as buttons
+
                 button.Click += (sender, e) => OpenSurvey(survey.SurveyId);
                 SurveyList.Children.Add(button);
+                // when the button is clicked, open ViewSurveyWindow
             }
         }
         public List<Survey> GetSurveysForUser(int userId)
@@ -65,20 +68,17 @@ namespace ITKarieraAnketi.UIWindows
 
         private void CreateNewServey_Click(object sender, RoutedEventArgs e)
         {
-            // Show an input dialog
             var dialog = new InputDialog("Enter the name of the new survey:");
             if (dialog.ShowDialog() == true)
             {
-                // Get the name from the dialog
+                
                 string surveyName = dialog.ResponseText;
-
-                // Pass the name to the SurveyCreationWindow
                 SurveyCreationWindow surveyCreationWindow = new SurveyCreationWindow(surveyName);
                 surveyCreationWindow.Show();
                 Close();
             }
+           
         }
-
         private void MenuItemLogout_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = new MainWindow();
@@ -113,10 +113,11 @@ namespace ITKarieraAnketi.UIWindows
                         context.SaveChanges();
                     }
                 }
-
                 MainWindow mainWindow = new MainWindow();
                 mainWindow.Show();
                 Close();
+
+                // when the user deletes their account, this goes through the entire database and deletes all surveys, questions and answers connected by UserId and then throw the user back to MainWindow
             }
         }
     }
